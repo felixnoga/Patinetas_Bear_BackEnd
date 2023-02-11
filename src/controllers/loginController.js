@@ -1,6 +1,8 @@
-const jwt = require('jsonwebtoken');
 const startConnection = require('../config/connectiondb.js');
 const bcrypt = require("bcrypt");
+
+const tokenGenerator = require("../utils/tokenGenerator")
+
 
 const db = startConnection();
 
@@ -21,9 +23,9 @@ const loginController = async (req, res) => {
                         error: "Server error",
                     });
                 } else if (result === true) { 
-                    const token = jwt.sign(
-                        { email: email }, process.env.SECRET_KEY
-                    );
+
+                    const token = tokenGenerator(user.email);
+                    
                     res.status(200).json({
                         message: "User signed in!",
                         token: token,

@@ -1,8 +1,8 @@
 const startConnection = require("../config/connectiondb.js");
+const tokenGenerator = require("../utils/tokenGenerator")
 
 const client = startConnection();
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
 
@@ -41,17 +41,15 @@ const registerUser = async (req, res) => {
                         }
                         else {
                             flag = 1;
-                            res.status(200).send({ message: 'User añadido a la database' });
+
+                            const token = tokenGenerator(user.email);
+
+                            res.status(200).send({ 
+                                message: 'User añadido a la database',
+                                token: token
+                             });
                         }
                     })
-                if (flag) {
-                    const token = jwt.sign(
-                        {
-                            email: user.email
-                        },
-                        process.env.SECRET_KEY
-                    );
-                };
             });
         }
     }
