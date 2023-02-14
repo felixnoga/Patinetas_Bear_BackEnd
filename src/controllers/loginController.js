@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const startConnection = require('../config/connectiondb.js');
+const startConnection = require('../models/connectiondb.js');
 const bcrypt = require("bcrypt");
 
 const db = startConnection();

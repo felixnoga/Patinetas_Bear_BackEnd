@@ -1,4 +1,4 @@
-const startConnection = require("../config/connectiondb.js");
+const startConnection = require("../models/connectiondb.js");
 
 const client = startConnection();
 const bcrypt = require("bcrypt");
@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
 
-    const { name, email, password } = req.body;
+    const { user_name, email, password } = req.body;
     try {
         const data = await client.query(`SELECT * FROM users WHERE email= $1;`, [email]);
         const arr = data.rows;
@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
                         error: "Error en el servidor",
                     });
                 const user = {
-                    name,
+                    user_name,
                     email,
                     password: hash,
                 };
@@ -29,8 +29,8 @@ const registerUser = async (req, res) => {
 
 
                 client
-                    .query(`INSERT INTO users (name, email, password) VALUES ($1,$2,$3);`, 
-                    [user.name, user.email, user.password], (err) => {
+                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3);`, 
+                    [user.user_name, user.email, user.password], (err) => {
 
                         if (err) {
                             flag = 0;
