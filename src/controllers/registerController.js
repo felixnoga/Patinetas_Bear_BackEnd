@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
         const arr = data.rows;
         if (arr.length != 0) {
             return res.status(400).json({
-                error: "Email ya registrado", // HASTA AQUÍ BIEN 
+                error: "Email ya registrado",  
             });
         } else {
             bcrypt.hash(password, 10, (err, hash) => {

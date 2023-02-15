@@ -1,15 +1,13 @@
 const startConnection = require('../config/connectiondb.js');
 const bcrypt = require("bcrypt");
-
 const tokenGenerator = require("../utils/tokenGenerator")
-
 
 const db = startConnection();
 
 const loginController = async (req, res) => {
     const { email, password } = req.body;
     try {
-        console.log(req.body); // AQUÍ ES, EN DB.QUERY
+        console.log(req.body); 
         const data = await db.query(`SELECT * FROM users WHERE email= $1;`, [email]) 
         const user = data.rows;
         if (user.length == 0) {
@@ -22,20 +20,21 @@ const loginController = async (req, res) => {
                     res.status(500).json({
                         error: "Server error",
                     });
-                } else if (result === true) { 
+                } else if (result) { 
 
                     const token = tokenGenerator(user.email);
                     
                     res.status(200).json({
                         message: "User signed in!",
-                        token: token,
+                        token,
                     });
                 }
                 else {
-                    if (result != true)
+                    if (!result){
                         res.status(400).json({
-                            error: "Wrong password",
+                            error: "Contraseña errónea",
                         });
+                    }
                 }
             })
         }
