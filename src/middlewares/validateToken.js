@@ -3,8 +3,6 @@ require('dotenv').config();
 
 const validateToken =  (req, res, next) => {
 
-    console.log(req.header);
-
     const token = req.query.token;
 
     console.log(token);

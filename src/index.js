@@ -11,7 +11,7 @@ const PORT = 3005
 //middlewares here
 app.use(express.json()); 
 app.use(cors());
-router.use('/secure-request', validateToken);
+// router.use('/secure-request', validateToken);
 
 // ROUTES
 app.post('/login', require('./controllers/loginController'));
