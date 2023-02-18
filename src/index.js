@@ -1,6 +1,8 @@
 /*const express = require("express")
 const cors = require("cors");
-const validateToken = require('./middlewares/validateToken')
+const validateToken = require('./middlewares/validateToken');
+const router = express.Router();
+
 require('dotenv').config();
 
 const app = express();
@@ -11,8 +13,7 @@ app.use(cors());
 app.use('/secure-request', validateToken, );
 
 app.post('/login', require('./controllers/loginController'));
-app.post('/register', require("./controllers/registerController"))
-
+app.post('/register', require("./controllers/registerController"));
 
 
 app.listen(PORT,
