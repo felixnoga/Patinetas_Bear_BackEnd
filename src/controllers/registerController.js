@@ -1,8 +1,11 @@
+
 const startConnection = require("../config/connectiondb.js");
+const tokenGenerator = require("../utils/tokenGenerator")
 
 const client = startConnection();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 
 const registerUser = async (req, res) => {
 
@@ -12,7 +15,7 @@ const registerUser = async (req, res) => {
         const arr = data.rows;
         if (arr.length != 0) {
             return res.status(400).json({
-                error: "Email ya registrado", // HASTA AQUÍ BIEN 
+                error: "Email ya registrado",  
             });
         } else {
             bcrypt.hash(password, 10, (err, hash) => {
@@ -27,9 +30,8 @@ const registerUser = async (req, res) => {
                 };
                 var flag = 1;
 
-
                 client
-                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3);`, 
+                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3) returning *;`, 
                     [user.user_name, user.email, user.password], (err) => {
 
                         if (err) {
@@ -39,19 +41,18 @@ const registerUser = async (req, res) => {
                                 error: "Database error"
                             })
                         }
-                        else {
+                
+                       else {
                             flag = 1;
-                            res.status(200).send({ message: 'User añadido a la database' });
+
+                            const token = tokenGenerator(user.email);
+
+                            res.status(200).send({ 
+                                message: 'User añadido a la database',
+                                token: token
+                             });
                         }
                     })
-                if (flag) {
-                    const token = jwt.sign(
-                        {
-                            email: user.email
-                        },
-                        process.env.SECRET_KEY
-                    );
-                };
             });
         }
     }
