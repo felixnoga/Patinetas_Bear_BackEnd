@@ -4,6 +4,8 @@ const tokenGenerator = require("../utils/tokenGenerator")
 
 const client = startConnection();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 
 const registerUser = async (req, res) => {
 
@@ -28,9 +30,8 @@ const registerUser = async (req, res) => {
                 };
                 var flag = 1;
 
-
                 client
-                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3);`, 
+                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3) RETURNING *;`,
                     [user.user_name, user.email, user.password], (err) => {
 
                         if (err) {
@@ -40,7 +41,8 @@ const registerUser = async (req, res) => {
                                 error: "Database error"
                             })
                         }
-                        else {
+                
+                       else {
                             flag = 1;
 
                             const token = tokenGenerator(user.email);

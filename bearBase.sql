@@ -9,6 +9,10 @@ CREATE TABLE IF NOT EXISTS users (
 ;
 
 
+INSERT INTO users(user_id, user_name, password, email)
+values(35, 'madrid2024', 12345, 'madrid2@gmail.com'),
+(36, 'elsol22', 23456, 'elsol2@gmail.com')
+
 -- -----------------------------------------------------
 -- Table clients 2
 -- -----------------------------------------------------
@@ -66,7 +70,7 @@ CREATE TABLE IF NOT EXISTS repairmen (
 DROP TABLE IF EXISTS booking ;
 
 CREATE TABLE IF NOT EXISTS booking (
-  booking_id SERIAL NOT NULL,
+  booking_id INT NOT NULL,
   timestamp TIMESTAMP NOT NULL,
   client_id SERIAL NOT NULL,
   status BOOLEAN NOT NULL,
@@ -98,8 +102,6 @@ DROP TABLE IF EXISTS scooter ;
 
 CREATE TABLE IF NOT EXISTS scooter (
   scooter_id SERIAL NOT NULL,
-  client_id SERIAL NOT NULL,
-  booking_id SERIAL NOT NULL,
   BATERY INT NULL,
   lng FLOAT NOT NULL,
   lat FLOAT NOT NULL,
@@ -108,7 +110,7 @@ CREATE TABLE IF NOT EXISTS scooter (
   additional_info VARCHAR(100) NULL,
   status_id SERIAL NOT NULL,
   PRIMARY KEY (scooter_id),
-  CONSTRAINT client_id
+  CONSTRAINT (fk_scooter_id),
     FOREIGN KEY (client_id)
     REFERENCES clients (client_id)
     ON DELETE NO ACTION

@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const startConnection = require('../config/connectiondb.js');
 const bcrypt = require("bcrypt");
 const tokenGenerator = require("../utils/tokenGenerator")
