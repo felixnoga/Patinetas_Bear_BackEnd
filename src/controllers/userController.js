@@ -6,7 +6,8 @@ const createUser = async (req, res) => {
 }
 
 const getOnlyUser = async (req, res) => {
-    const dataBaseRep = await UserManager.getOnlyUser(req.user_id);
+    const id = parseInt(req.params.id)
+    const dataBaseRep = await UserManager.getOnlyUser(id);
     res.status(200).json(dataBaseRep);
 }
 
@@ -16,3 +17,4 @@ const getAllUser = async (req, res) => {
 }
 
 module.exports = { createUser, getOnlyUser, getAllUser }
+
