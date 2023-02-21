@@ -11,9 +11,10 @@ app.use(express.json()); // this to get req.body
 app.use(cors());
 
 //IMPORT ROUTES
-app.use('/', validateToken, require('./src/routes/index'));
 app.use("/login", require('./src/routes/login')); 
 app.use("/register", require('./src/controllers/registerController')); 
+// app.use('/', validateToken, require('./src/routes/index'));
+app.use('/', require('./src/routes/index'));
 
 app.listen(PORT,
     () => { console.log(`server in port ${PORT}`) })
