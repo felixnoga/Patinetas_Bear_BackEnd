@@ -41,6 +41,18 @@ class UserManager {
         console.log(queryresponse)
             return queryresponse.rows[0];
     };
+
+    static async updateUser(newUser){
+        const BDClient =  startConnection();
+        const queryresponse = await BDClient.query("UPDATE users (user_name, email, password) VALUES ($1,$2,$3)  WHERE user_id equal id",
+        [newUser.user_name, newUser.email, newUser.password]);
+        BDClient.end();
+        console.log(queryresponse)
+        if (!queryresponse) {
+            return null;
+          }
+          return queryresponse;
+        }
     }
 
 module.exports = { User, UserManager };
