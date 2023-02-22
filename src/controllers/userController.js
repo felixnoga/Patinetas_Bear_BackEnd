@@ -45,7 +45,7 @@ const updateUser = async (req, res) => {
         user_id: req.params.id,
     };
     try{
-        const dataBaseRep = await UserManager.updateUserid(updateUser);
+        const dataBaseRep = await UserManager.updateUser(updateUser);
     if(dataBaseRep){
         return res.status(201).json(dataBaseRep);
     }

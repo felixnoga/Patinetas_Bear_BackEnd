@@ -17,6 +17,7 @@ class User {
 }
 
 class UserManager {
+
    static async getOnlyUser(user_id){
         const BDClient = startConnection();
         const queryresponse = await BDClient.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
@@ -44,8 +45,8 @@ class UserManager {
 
     static async updateUser(newUser){
         const BDClient =  startConnection();
-        const queryresponse = await BDClient.query("UPDATE users (user_name, email, password) VALUES ($1,$2,$3)  WHERE user_id equal id",
-        [newUser.user_name, newUser.email, newUser.password]);
+        const queryresponse = await BDClient.query('UPDATE users SET user_name= $1, email= $2, password= $3 WHERE user_id = $4 RETURN *',
+        [newUser.user_name, newUser.email, newUser.password, newUser.user_id]);
         BDClient.end();
         console.log(queryresponse)
         if (!queryresponse) {
