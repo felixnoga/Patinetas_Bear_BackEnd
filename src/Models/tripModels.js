@@ -51,9 +51,8 @@ class TripManager{
             const response= {payment, clientupdated}
             return response
         }catch(error){
-            const errorMessage= {message: "ups, we can't update the trip", error}
             console.log(error)
-            return errorMessage
+            throw Error( "ups, we can't update the trip")
         }
     }
 
@@ -72,8 +71,8 @@ class TripManager{
             console.log(payload.rows[0])
             return payload.rows[0]
         }catch(error){
-            const errorMessage= {message: "ups, we can't create the payment"}
-            return errorMessage
+            console.log(error)
+            throw Error("ups, we can't create the payment")
         }
         
     }

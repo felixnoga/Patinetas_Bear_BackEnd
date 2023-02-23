@@ -21,7 +21,7 @@ class BookingManager {
                 // TODO Duraciín de 10 min y sino scooter vuelve a cambiar a avilable.
             }catch(error){
                 console.log(error)
-                throw new Error(error)
+                throw Error(error)
             }
         }
     static async initTrip(bookId, time, lng, lat){
@@ -38,13 +38,11 @@ class BookingManager {
                         return trip
                     }catch(error){
                         console.log(error)
-                        const errorMessage = { message: "have an error creating trip", error }
-                        return errorMessage
+                        throw Error("have an error creating trip")
                     }
                     }
             }catch(error){
-                const errorMessage= {message:"cant update state of Booking", error}
-                return errorMessage
+                throw Error("have an error creating trip")
             }
     }
     static async getBooking(bookId){
@@ -54,9 +52,8 @@ class BookingManager {
             console.log(payload.rows)
             return payload.rows[0]
         } catch (error) {
-            const errorMessage = { error, message: "ups, ha habido un error interno" }
             console.log(error)
-            return errorMessage
+            throw Error("ups, ha habido un error interno")
         }
     }
 }

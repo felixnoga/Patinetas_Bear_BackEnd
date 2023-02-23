@@ -4,13 +4,12 @@ const completeTrip= async (req, res)=>{
         const tripId= parseInt(req.params.id)
         // faltacomprobar que ese viaje existe
         const {time , lng, lat}= req.body;
-        const payload= await TripManager.completeTrip(tripId, time, lng, lat);
-        console.log(tripId, time, lng, lat, payload)
-        if(payload.error){
-            return res.status(500).json(payload)
-        }
-        res.status(201).json(payload)
-}
+        try{
+            const payload= await TripManager.completeTrip(tripId, time, lng, lat);
+            res.status(201).json(payload)
+        }catch(error){
+            res.status(500).json({message: "El viaje no ha podido ser completado, ha habido un problema en el servidor"})
+        }}
 
 module.exports={
     completeTrip
