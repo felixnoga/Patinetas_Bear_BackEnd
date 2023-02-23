@@ -12,11 +12,13 @@ class scootersManager{
     try{
         const data = await client.query(query, values) 
         const payload= data.rows
-        if(!data.rowCount) return false
+        if(data.rows.length === 0) 
+        {
+            throw Error("no se han encontrado scooters cerca")
+        }
         return payload
     }catch(error){
-        console.log(error)
-        return error
+        throw Error(error)
     }
     }
 
@@ -50,21 +52,3 @@ class scootersManager{
 
 
 module.exports=  scootersManager
-// crear datos de scooter Insert into Scooter(scooter_id, batery, lng, lat, accumulated_km, next_checkup, status_id)
-// Values(00001, 50, -3.6862, 40.4, 0, '5/11/2025', 1)
-// crear status de scooters -> insert into scooter_status (name) values( 'Available'),( 'Reserved'),('not available')
-// Insert into Scooter(scooter_id, batery, lng, lat, accumulated_km, next_checkup, status_id)
-// Values(00002, 50, -3.7, 40.4, 0, '5/11/2025', 1)
-//     ,(00001, 50, -3.6862, 40.4, 0, '5/11/2025', 1)
-//     , (00003, 50, -3.695, 40.4096, 0, '5/11/2025', 1)
-//     , (00004, 70, -3.699, 40.405, 0, '5/11/2025', 1)
-//     , (00005, 50, -15.422, 28.10807, 0, '5/11/2025', 1)
-//     , (00006, 60, -15.400, 28.11, 0, '5/11/2025', 1)
-//     , (00007, 35, -15.388, 28.10500, 0, '5/11/2025', 1)
-//     , (00008, 45, -3.71, 40.405, 0, '5/11/2025', 1)
-// , (00009, 89, -3.7009, 40.3900, 0, '5/11/2025', 3)
-// , (00010, 99, -3.635, 40.408, 0, '5/11/2025', 1)
-//     , (00011, 58, -3.6, 40.3, 0, '5/11/2025', 3)
-//     , (00012, 83, -3.599, 40.41, 0, '5/11/2025', 1);
-// ***esto son las foreignkeys  nextval('scooter_client_id_seq'::regclass)**
-// nextval('scooter_booking_id_seq'::regclass)
