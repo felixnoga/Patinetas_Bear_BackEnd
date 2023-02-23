@@ -21,8 +21,7 @@ class BookingManager {
                 // TODO Duraciín de 10 min y sino scooter vuelve a cambiar a avilable.
             }catch(error){
                 console.log(error)
-                const errorMessage = { message: "ups, we coudnt make your request", error }
-                return errorMessage
+                throw new Error(error)
             }
         }
     static async initTrip(bookId, time, lng, lat){

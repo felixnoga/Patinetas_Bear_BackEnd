@@ -33,16 +33,16 @@ class scootersManager{
         }
 
     }
-    static async bookingScooter(id) {
-        const query = 'UPDATE scooter SET status_id= 2 WHERE scooter_id = $1'
+    static async bookingScooter(id, status= 2 ) {
+        const query = 'UPDATE scooter SET status_id= $1 WHERE scooter_id = $2'
         try {
-            const data = await client.query(query, [id])
+            const data = await client.query(query, [status, id])
             console.log(data.rows)
             return true
 
         } catch (error) {
-            const errorMessage = { message: "fail updating scooter geometry", error }
-            return errorMessage
+            console.log(error)
+            throw Error("ups, we cant complete the request, scooter_state can't be updated")
         }
 
     }
