@@ -61,7 +61,7 @@ class TripManager{
         const time1= new Date(timedate1).valueOf()
         const time2= new Date(timedate2).valueOf()
         const difference= parseInt(time2)- parseInt(time1)
-        const totalTimeinMinutes= difference/1000
+        const totalTimeinMinutes= Math.abs(difference/1000)
         return totalTimeinMinutes
     }
 
