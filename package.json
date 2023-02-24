@@ -2,11 +2,11 @@
   "name": "patinetes_bear",
   "version": "1.0.0",
   "description": "App web to rent electric scooters",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "node ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/app.js"
   },
   "author": "Group 4. Carlos, Paola, Ana",
   "license": "ISC",

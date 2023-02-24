@@ -1,9 +1,5 @@
 const { UserManager } = require('../models/users.js');
 
-const createUser = async (req, res) => {
-    const dataBaseRep = await UserManager.createUser(req.body); //coge informacion del body 
-    res.status(201).json(dataBaseRep);
-}
 
 const getOnlyUser = async (req, res) => {
     const id = parseInt(req.params.id)
@@ -16,5 +12,5 @@ const getAllUser = async (req, res) => {
     res.status(200).json(dataBaseRep);
 }
 
-module.exports = { createUser, getOnlyUser, getAllUser }
+module.exports = { getOnlyUser, getAllUser }
 
