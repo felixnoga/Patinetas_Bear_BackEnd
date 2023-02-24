@@ -31,7 +31,7 @@ const registerUser = async (req, res) => {
                 var flag = 1;
 
                 client
-                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3) RETURNING *;`,
+                    .query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3) returning *;`, 
                     [user.user_name, user.email, user.password], (err) => {
 
                         if (err) {
