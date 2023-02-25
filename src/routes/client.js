@@ -1,8 +1,11 @@
-/*const express = require('express');
+const express = require('express');
 const router = express.Router();
-const registersController = require('../controllers/registersController');
+const {getClients, getOnlyClient, registerClient} = require('../controllers/clientController')
+ 
 
-//register user
-//router.post('/', require('../controllers/registersController'));
+router.get("/", getClients); 
+router.get('/:id', getOnlyClient); 
+router.post("/", registerClient);
 
-module.exports = router;*/
+
+module.exports = router;
