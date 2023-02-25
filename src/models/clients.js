@@ -1,5 +1,6 @@
 const startConnection = require('../config/connectiondb');
 const { User, UserManager } = require('./users');
+require('dotenv').config();
 
 class Client extends User {
 
@@ -9,10 +10,10 @@ class Client extends User {
         balance = null,
         no_trips = null, 
         app_uses = null, 
-        mapbox_token = null, 
+        mapbox_token = process.env.REACT_APP_MAP_PUBLIC_TOKEN, 
 
     ){
-            super( user_id, user_name, password, email); 
+            super(); 
 
             this.client_id = client_id;
             this.balance = balance;
@@ -45,12 +46,12 @@ class ClientManager extends UserManager {
 
         let userData = await this.registerUser(newUser); 
 
-        if('error' in userData){
+        if('error' in userData ){
             console.error(userData);
             return userData;
         }
           
-        const client_id = userData.user_id;
+        const client_id = userData.user.user_id;
 
         try {
 
@@ -62,13 +63,8 @@ class ClientManager extends UserManager {
                     error: "Cliente ya registrado",
                 });
             } else {
-                const client = {
-                    client_id: client_id, 
-                    balance : 0,
-                    no_trips : 0, 
-                    app_uses : 0, 
-                    mapbox_token : null, 
-                }
+                const client = new Client (client_id, 0, 0, 0,); 
+
                 const newClient = await BDClient.query(`INSERT INTO clients (client_id, balance, no_trips, app_uses, mapbox_token) VALUES ($1,$2,$3,$4,$5) RETURNING *;`,
                 [client.client_id, client.balance, client.no_trips, client.app_uses, client.mapbox_token]) 
                     
@@ -81,6 +77,8 @@ class ClientManager extends UserManager {
                     else {
                         return({
                             message: 'Cliente añadido a la database',
+                            user: userData.user,
+                            client: newClient.rows[0] 
                         })
                     }
                 }

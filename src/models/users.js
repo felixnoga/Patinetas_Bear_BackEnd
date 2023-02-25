@@ -2,20 +2,21 @@
 const startConnection = require('../config/connectiondb');
 const bcrypt = require("bcrypt");
 const tokenGenerator = require("../utils/tokenGenerator"); 
-
-
 class User {
     
     constructor(
-        user_id = null,
+        
         user_name = null,
         password = null,
         email = null,
+        user_id = null,
+
         ){
-            this.user_id = user_id,
             this.user_name = user_name,
             this.password = password,
-            this.email = email
+            this.email = email,
+            this.user_id = user_id
+
         }
     }
     
@@ -58,11 +59,7 @@ class User {
                         });
                     }
 
-                    const user = {
-                        user_name,
-                        email,
-                        password: hash,
-                    };
+                    const user = new User (user_name,hash, email);
                     
                     const insertedUser = await BDClient.query(`INSERT INTO users (user_name, email, password) VALUES ($1,$2,$3) RETURNING *;`,
                     [user.user_name, user.email, user.password])
@@ -79,7 +76,7 @@ class User {
                                                  
                         return({
                             token: token,
-                            user_id: insertedUser.rows[0].user_id
+                            user: insertedUser.rows[0],
                         });
                         
                     }
