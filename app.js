@@ -1,7 +1,6 @@
 const express = require("express")
 const cors = require("cors");
 // const validateToken = require('./src/middlewares/validateToken')
-// const triggerClient = require('./src/middlewares/triggerClient')
 require('dotenv').config();
 
 const app = express();

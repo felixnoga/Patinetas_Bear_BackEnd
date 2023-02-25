@@ -52,6 +52,7 @@ class ClientManager extends UserManager {
         }
           
         const client_id = userData.user.user_id;
+        const token = userData.token;
 
         try {
 
@@ -78,7 +79,8 @@ class ClientManager extends UserManager {
                         return({
                             message: 'Cliente añadido a la database',
                             user: userData.user,
-                            client: newClient.rows[0] 
+                            client: newClient.rows[0], 
+                            token: token
                         })
                     }
                 }
