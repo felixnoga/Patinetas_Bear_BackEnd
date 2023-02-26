@@ -26,8 +26,9 @@ const scootersInZone = async (req, res)=>{
 const availableScooterState= async (req, res)=>{
     // validar los datos.comprobar que exite una scooter con ese id.
     const id= parseInt(req.params.id)
+    const state= 1
     try{
-        await model.bookingScooter(id, 1)
+        await model.bookingScooter(id, state)
         res.status(201).json("request completed")
     }catch(error){
         res.status(500).json({error: "ups, we can't update Status"})
