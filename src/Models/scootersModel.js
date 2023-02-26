@@ -48,9 +48,9 @@ class scootersManager{
         }
     }
     static async getScooterInfo(type, id) {
-        const query= 'SELECT $1 from scooter WHERE scooter_id = $2'
+        const query= `SELECT ${type} from scooter WHERE scooter_id = $1`
         try {
-            const data = await client.query(query, [type, id])
+            const data = await client.query(query, [id])
             console.log(data.rows, data.rows[0])
             return data.rows[0]
 
