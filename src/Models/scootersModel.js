@@ -36,7 +36,7 @@ class scootersManager{
 
     }
     static async bookingScooter(id, status= 2 ) {
-        const query = 'UPDATE scooter SET status_id= $1 WHERE scooter_id = $2'
+        const query = 'UPDATE scooter SET status_id= $1 WHERE scooter_id = $2 returning *'
         try {
             const data = await client.query(query, [status, id])
             console.log(data.rows)
@@ -46,7 +46,18 @@ class scootersManager{
             console.log(error)
             throw Error("ups, we cant complete the request, scooter_state can't be updated")
         }
+    }
+    static async getScooterInfo(type, id) {
+        const query= 'SELECT $1 from scooter WHERE scooter_id = $2'
+        try {
+            const data = await client.query(query, [type, id])
+            console.log(data.rows, data.rows[0])
+            return data.rows[0]
 
+        } catch (error) {
+            console.log(error)
+            throw Error("ups, we had a problem getting the scooter info in server")
+        }
     }
 }
 
