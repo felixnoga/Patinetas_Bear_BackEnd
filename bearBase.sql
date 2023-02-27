@@ -265,3 +265,7 @@ Insert into clients(client_id, balance, no_trips, app_uses, mapbox_token)
  (13, 20, 2, 10, ''),
  (14, 20, 2, 10, ''),
  (15, 20, 2, 10, '')
+
+ 
+Insert into trips(trip_id, scooter_id, booking_id, start_date, end_date, lat_start, lng_start, lat_end, lng_end)
+ Values(05, 10, 15, '2023-01-03', '2023-01-03', 28.10807, 0, -15, 40)

@@ -10,7 +10,6 @@ const bookingRide= async (req, res)=>{
     }catch(error){
         res.status(500).json({ message: "ups, we coudnt make your request"})
     }
-
 }
 
 const initTrip= async(req, res)=>{
