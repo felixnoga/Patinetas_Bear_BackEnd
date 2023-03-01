@@ -1,4 +1,4 @@
-const BookingManager= require("../Models/bookingModels")
+const BookingManager= require("../models/bookingModels")
 const tenMinTocancel= require("../Utils/cronFunction")
 
 const bookingRide= async (req, res)=>{

@@ -1,6 +1,6 @@
 const startConnection = require('../config/connectiondb');
 const scootersManager = require("./scootersModel")
-const BookingManager = require("../Models/bookingModels")
+const BookingManager = require("./bookingModels")
 require('dotenv').config();
 
 const client = startConnection()

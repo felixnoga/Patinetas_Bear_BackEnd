@@ -1,4 +1,4 @@
-const {paymentIntent} = require("../Models/strypeModels")
+const {paymentIntent} = require("../models/strypeModels")
 
 const confirmPayment= async (req, res)=>{
     let { id, amount } = req.body 
