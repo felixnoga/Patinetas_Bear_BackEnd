@@ -45,10 +45,11 @@ class ClientManager extends UserManager {
         const query = ('UPDATE clients SET balance = balance + $1 WHERE client_id = $2 RETURNING *')
         try{
             const queryresponse = await BDClient.query(query, [convertedAmount ,client_id]);
-            BDClient.end();
             return queryresponse.rows[0];
         }catch(error){
             throw error
+        }finally{
+            BDClient.end();
         }
     }
 
