@@ -1,3 +1,4 @@
+
 const model= require("../models/scootersModel.js")
 
 const getLoc=(a)=> {
