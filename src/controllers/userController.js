@@ -1,4 +1,4 @@
-const { UserManager } = require('../models/users.js');
+const { UserManager } = require('../modelos/users.js');
 
 
 const getOnlyUser = async (req, res) => {

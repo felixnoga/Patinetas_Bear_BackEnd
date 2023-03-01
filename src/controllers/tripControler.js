@@ -1,4 +1,4 @@
-const TripManager= require("../models/tripModels")
+const TripManager= require("../modelos/tripModels")
 
 const completeTrip= async (req, res)=>{
         const tripId= parseInt(req.params.id)

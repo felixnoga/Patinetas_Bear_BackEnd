@@ -1,5 +1,5 @@
 const e = require("express");
-const BookingManager= require("../models/bookingModels")
+const BookingManager= require("../modelos/bookingModels")
 const tenMinTocancel= require("../utils/cronFunction")
 
 const bookingRide= async (req, res)=>{

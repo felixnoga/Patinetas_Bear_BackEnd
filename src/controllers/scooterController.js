@@ -1,4 +1,4 @@
-const model= require("../models/scootersModel")
+const model= require("../modelos/scootersModel")
 
 const getLoc=(a)=> {
     const geoLoc= a.split(",")
