@@ -19,5 +19,4 @@ const registerClient = async (req, res) => {
 }
 
 
-
 module.exports = {getClients, getOnlyClient, registerClient}
