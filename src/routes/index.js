@@ -3,7 +3,6 @@ const router = express.Router();
 const app = express();
 
 
-
 app.use("/user", require('./user'));
 // app.use("/client", require('./clients'));
 

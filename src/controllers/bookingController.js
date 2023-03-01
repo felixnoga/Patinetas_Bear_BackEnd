@@ -1,6 +1,6 @@
-const e = require("express");
 const BookingManager= require("../models/bookingModels")
 const tenMinTocancel= require("../utils/cronFunction")
+
 
 const bookingRide= async (req, res)=>{
     const {id_user , id_scooter}= req.body;
@@ -14,7 +14,6 @@ const bookingRide= async (req, res)=>{
         console.log(error)
         res.status(500).json({ message: "ups, we coudnt make your request"})
     }
-
 }
 
 const initTrip= async(req, res)=>{

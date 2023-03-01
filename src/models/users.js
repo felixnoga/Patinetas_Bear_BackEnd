@@ -19,13 +19,15 @@ class User {
 
         }
     }
-    
-    class UserManager {
-        static async getOnlyUser(user_id){
-            const BDClient = startConnection();
-            const queryresponse = await BDClient.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
-            BDClient.end();
-            console.log(queryresponse)
+
+
+class UserManager {
+
+   static async getOnlyUser(user_id){
+        const BDClient = startConnection();
+        const queryresponse = await BDClient.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
+        BDClient.end();
+        console.log(queryresponse)
             return queryresponse.rows;
         };
         
