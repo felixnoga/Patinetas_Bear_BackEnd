@@ -1,13 +1,16 @@
 const BookingManager= require("../Models/bookingModels")
+const tenMinTocancel= require("../Utils/cronFunction")
 
 const bookingRide= async (req, res)=>{
     const {id_user , id_scooter}= req.body;
     const time = new Date().toUTCString();
-    console.log(req.body, id_user)
     try{
-        const info= await BookingManager.bookingRide(id_user, id_scooter, time )
+        const info= await BookingManager.bookingRide(id_user, id_scooter, time );
+        const booking_id= info.data.booking_id
+        tenMinTocancel(booking_id, id_scooter);
         res.status(201).json(info)
     }catch(error){
+        console.log(error)
         res.status(500).json({ message: "ups, we coudnt make your request"})
     }
 }

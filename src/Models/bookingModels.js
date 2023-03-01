@@ -58,5 +58,18 @@ class BookingManager {
             throw Error("ups, ha habido un error interno")
         }
     }
+    static async getBookingInfo(type, id) {
+        const query = `SELECT ${type} FROM booking WHERE booking_id = $1`
+        try {
+            const data = await client.query(query, [id])
+            console.log(data, data.rows, data.rows[0], data.rows[0][type] )
+            return data.rows[0][type]
+
+        } catch (error) {
+            console.log(error)
+            throw Error("ups, we had a problem getting the booking info in server")
+        }
+    }
+
 }
 module.exports= BookingManager
