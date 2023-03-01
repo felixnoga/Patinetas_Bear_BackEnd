@@ -39,6 +39,18 @@ class ClientManager extends UserManager {
         console.log(queryresponse)
             return queryresponse.rows;
     }
+    static async updateClientBalance({client_id, amount}) {
+        const BDClient = startConnection();
+        const convertedAmount = amount/100 
+        const query = ('UPDATE clients SET balance = balance + $1 WHERE client_id = $2 RETURNING *')
+        try{
+            const queryresponse = await BDClient.query(query, [convertedAmount ,client_id]);
+            BDClient.end();
+            return queryresponse.rows[0];
+        }catch(error){
+            throw error
+        }
+    }
 
     static async registerClient(newUser){
 
