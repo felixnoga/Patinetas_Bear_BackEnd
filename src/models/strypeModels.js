@@ -2,12 +2,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 require('dotenv').config();
 
 const paymentIntent = async ({ id, amount }) => {
+    const price= amount/100
     try{
         const payment = await stripe.paymentIntents.create({
             // Utiliza centimos como modelo base, por lo que los pagos tienen que ser mayor de 50 ( 50 centimos) 
             amount: amount ,
             currency: "eur",
-            description: "Recarga 20€",
+            description: `Recarga ${price}€`,
             payment_method: id,
             confirm: true
         })
