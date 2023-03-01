@@ -1,5 +1,5 @@
-const model = require("../modelos/bookingModels")
-const scooterModel = require("../modelos/scootersModel")
+const model = require("../models/bookingModels")
+const scooterModel = require("../models/scootersModel")
 
 
 const tenMinTocancel= (booking_id, scooter_id) =>{ 

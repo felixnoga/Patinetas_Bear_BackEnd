@@ -2,7 +2,7 @@
 const startConnection = require("../config/connectiondb.js");
 const tokenGenerator = require("../utils/tokenGenerator"); 
 // const { UserManager } = require ("../models/users")
-const {ClientManager} = require('../modelos/clients')
+const {ClientManager} = require('../models/clients')
 
 const client = startConnection();
 const bcrypt = require("bcrypt");

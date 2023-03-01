@@ -1,6 +1,6 @@
-const {paymentIntent} = require("../modelos/strypeModels")
+const {paymentIntent} = require("../models/strypeModels")
 
-const { ClientManager }= require("../modelos/clients")
+const { ClientManager }= require("../models/clients")
 
 const confirmPayment= async (req, res)=>{
     const client_id= parseInt(req.params.id)
