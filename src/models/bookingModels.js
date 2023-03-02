@@ -1,5 +1,5 @@
 const startConnection = require('../config/connectiondb');
-const scooterModels= require("../Models/scootersModel")
+const scooterModels= require("./scootersModel")
 require('dotenv').config();
 
 const client = startConnection()
@@ -45,9 +45,11 @@ class BookingManager {
                 throw Error("have an error creating trip")
             }
     }
+
     static async getBooking(bookId){
             const query = ('SELECT * from booking WHERE booking_id = $1')
         try {
+            console.log(query)
             const payload = await client.query(query, [bookId])
             console.log(payload.rows)
             return payload.rows[0]
