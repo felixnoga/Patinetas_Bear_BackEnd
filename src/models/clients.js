@@ -32,7 +32,7 @@ class ClientManager extends UserManager {
             return queryResponse.rows;
     }
 
-    static async getOnlyClient(){
+    static async getOnlyClient(client_id){
         const BDClient = startConnection();
         const queryresponse = await BDClient.query("SELECT * FROM clients WHERE client_id = $1", [client_id]);
         BDClient.end();
@@ -92,8 +92,8 @@ class ClientManager extends UserManager {
                         return({
                             message: 'Cliente añadido a la database',
                             user: userData.user,
-                            client: newClient.rows[0], 
-                            token: token
+                            token: token,
+                            id: client_id
                         })
                     }
                 }

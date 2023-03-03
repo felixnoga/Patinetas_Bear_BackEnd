@@ -38,6 +38,22 @@ class UserManager {
             console.log(queryresponse)
             return queryresponse.rows;
         };
+
+
+        static async updateUser(newUser){
+            const BDClient =  startConnection();
+            const queryresponse = await BDClient.query('UPDATE users SET user_name= $1, email= $2, password= $3 WHERE user_id = $4 RETURNING *',
+            [newUser.user_name, newUser.email, newUser.password, newUser.user_id]);
+            BDClient.end();
+            console.log(queryresponse)
+            if (!queryresponse) {
+                return null;
+              }
+              return queryresponse;
+            }
+        
+    
+
         
         static async registerUser(newUser){
             const BDClient =  startConnection();
