@@ -1,4 +1,5 @@
-const model= require("../Models/scootersModel")
+
+const model= require("../models/scootersModel.js")
 
 const getLoc=(a)=> {
     const geoLoc= a.split(",")
@@ -16,6 +17,7 @@ const scootersInZone = async (req, res)=>{
         const features= await model.scootersInZone(parseFloat(lng), parseFloat(lat))
         res.status(200).json({features})}
         catch(error){
+            console.log(error)
             if (error.message === "Error: no se han encontrado scooters cerca"){
             res.status(400).json({message: error.message})}
             else
@@ -26,8 +28,9 @@ const scootersInZone = async (req, res)=>{
 const availableScooterState= async (req, res)=>{
     // validar los datos.comprobar que exite una scooter con ese id.
     const id= parseInt(req.params.id)
+    const state= 1
     try{
-        await model.bookingScooter(id, 1)
+        await model.bookingScooter(id, state)
         res.status(201).json("request completed")
     }catch(error){
         res.status(500).json({error: "ups, we can't update Status"})

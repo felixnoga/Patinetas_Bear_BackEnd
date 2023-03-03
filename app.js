@@ -1,14 +1,19 @@
 const express = require("express")
 const cors = require("cors");
+const bodyParser = require('body-parser');
+const { validationResult } = require('express-validator');
+
 // const validateToken = require('./src/middlewares/validateToken')
 require('dotenv').config();
 
 const app = express();
-const PORT = 3005
+const PORT = 8080
 
 //middlewares here
 app.use(express.json()); // this to get req.body
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //IMPORT ROUTES
 app.use('/', require('./src/routes/index'));

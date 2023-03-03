@@ -2,16 +2,12 @@ DROP TABLE IF EXISTS users ;
 
 CREATE TABLE IF NOT EXISTS users (
   user_id SERIAL NOT NULL,
-  user_name VARCHAR(45),
+  user_name VARCHAR(45) NOT NULL,
   password VARCHAR(100) NOT NULL,
   email VARCHAR(45) NOT NULL,
   PRIMARY KEY (user_id))
 ;
 
-
-INSERT INTO users(user_id, user_name, password, email)
-values(35, 'madrid2024', 12345, 'madrid2@gmail.com'),
-(36, 'elsol22', 23456, 'elsol2@gmail.com')
 
 -- -----------------------------------------------------
 -- Table clients 2
@@ -20,7 +16,7 @@ DROP TABLE IF EXISTS clients ;
 
 CREATE TABLE IF NOT EXISTS clients (
   client_id SERIAL NOT NULL,
-  balance VARCHAR(45) NOT NULL,
+  balance REAL NOT NULL,
   no_trips INT NULL,
   app_uses INT NOT NULL,
   mapbox_token VARCHAR(250) NULL,
@@ -64,23 +60,7 @@ CREATE TABLE IF NOT EXISTS repairmen (
 ;
 
 
--- -----------------------------------------------------
--- Table booking 5
--- -----------------------------------------------------
-DROP TABLE IF EXISTS booking ;
 
-CREATE TABLE IF NOT EXISTS booking (
-  booking_id INT NOT NULL,
-  timestamp TIMESTAMP NOT NULL,
-  client_id SERIAL NOT NULL,
-  status BOOLEAN NOT NULL,
-  PRIMARY KEY (booking_id),
-  CONSTRAINT client_id
-    FOREIGN KEY (client_id)
-    REFERENCES clients (client_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
 
 
 -- -----------------------------------------------------
@@ -110,23 +90,36 @@ CREATE TABLE IF NOT EXISTS scooter (
   additional_info VARCHAR(100) NULL,
   status_id SERIAL NOT NULL,
   PRIMARY KEY (scooter_id),
-  CONSTRAINT (fk_scooter_id),
-    FOREIGN KEY (client_id)
-    REFERENCES clients (client_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT booking_id
-    FOREIGN KEY (booking_id)
-    REFERENCES booking (booking_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT status_id
+    CONSTRAINT status_id
     FOREIGN KEY (status_id)
     REFERENCES scooter_status (status_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
 
+-- -----------------------------------------------------
+-- Table booking 5
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS booking ;
+
+CREATE TABLE IF NOT EXISTS booking (
+  booking_id INT NOT NULL,
+  timestamp TIMESTAMP NOT NULL,
+  client_id SERIAL NOT NULL,
+  status BOOLEAN NOT NULL,
+  scooter_id SERIAL NOT NULL,
+  PRIMARY KEY (booking_id),
+  CONSTRAINT client_id
+    FOREIGN KEY (client_id)
+    REFERENCES clients (client_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT scooter_id
+    FOREIGN KEY (scooter_id)
+    REFERENCES scooter (scooter_id)
+     ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+	;
 
 -- -----------------------------------------------------
 -- Table trips 
