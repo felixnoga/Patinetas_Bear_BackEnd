@@ -92,7 +92,8 @@ class ClientManager extends UserManager {
                         return({
                             message: 'Cliente añadido a la database',
                             user: userData.user,
-                            token: token
+                            token: token,
+                            id: client_id
                         })
                     }
                 }
