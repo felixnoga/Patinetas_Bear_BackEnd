@@ -28,6 +28,7 @@ const loginController = async (req, res) => {
                     res.status(200).json({
                         message: "User signed in!",
                         token,
+                        id: user[0].user_id,
                     });
                 }
                 else {
