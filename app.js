@@ -16,7 +16,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 //IMPORT ROUTES
 app.use('/', require('./src/routes/index'));
 app.use("/login", require('./src/routes/login')); 
