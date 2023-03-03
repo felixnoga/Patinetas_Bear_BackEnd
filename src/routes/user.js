@@ -10,4 +10,5 @@ router.get("/", getAllUser);
 router.get('/:id', getOnlyUser); 
 router.post("/", userValidator, backValidation, registerUser);
 router.patch('/:id', updateUser)
+
 module.exports = router;

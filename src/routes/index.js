@@ -12,6 +12,7 @@ router.use("/booking", require("./booking"));
 router.use("/trip", require("./trips"));
 router.post("/payment/:id", require("../controllers/paymentController"))
 
+
 router.get("/", (req, res) => {
     res.status(200).send("Thanks for login!");
 });
