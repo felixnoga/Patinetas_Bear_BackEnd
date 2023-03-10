@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator');
 require('dotenv').config();
 
 const app = express();
-const PORT = 8080
+const PORT = 3005
 
 //middlewares here
 app.use(express.json()); // this to get req.body

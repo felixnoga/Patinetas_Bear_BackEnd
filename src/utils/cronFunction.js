@@ -4,7 +4,6 @@ const scooterModel = require("../models/scootersModel")
 
 const tenMinTocancel= (booking_id, scooter_id) =>{ 
     setTimeout( async() => {
-        console.log("se inicia cron", booking_id, scooter_id)
         const type = 'status'
         const status = 1
         // consulta el status del booking a los 10 min

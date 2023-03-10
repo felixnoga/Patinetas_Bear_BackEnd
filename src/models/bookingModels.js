@@ -18,7 +18,6 @@ class BookingManager {
                 console.log(payload.rows)
                 data = { data: payload.rows[0], code }
                 return data
-                // TODO Duraciín de 10 min y sino scooter vuelve a cambiar a avilable.
             }catch(error){
                 console.log(error)
                 throw Error(error)
@@ -62,11 +61,9 @@ class BookingManager {
         const query = `SELECT ${type} FROM booking WHERE booking_id = $1`
         try {
             const data = await client.query(query, [id])
-            console.log(data, data.rows, data.rows[0], data.rows[0][type] )
             return data.rows[0][type]
 
         } catch (error) {
-            console.log(error)
             throw Error("ups, we had a problem getting the booking info in server")
         }
     }
