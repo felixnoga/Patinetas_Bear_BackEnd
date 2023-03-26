@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3005
+const PORT = 8080
 
 //middlewares here
 app.use(express.json()); // this to get req.body
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//IMPORT ROUTES
+//IMPORT ROUTES     
 app.use('/', require('./src/routes/index'));
 app.use("/login", require('./src/routes/login')); 
 app.use("/register", require('./src/routes/user'));
