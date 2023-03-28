@@ -1,19 +1,21 @@
 const { Client } = require('pg');
 
-function startConnection(){
+const secrets = JSON.parse(process.env.DB);
+
+function startConnection() {
   const connectionData = {
-    user: process.env.USERDB,
-    host: process.env.HOSTDB,
-    database: process.env.NAMEDB,
-    password: process.env.PASSWORDDB,
-    port: 5432,
+    user: secrets.username,
+    host: secrets.host,
+    database: secrets.dbname,
+    password: secrets.password,
+    port: secrets.port,
     ssl: {
       require: true,
-      rejectUnauthorized: false
-    }
-  }
+      rejectUnauthorized: false,
+    },
+  };
   const myClient = new Client(connectionData);
-  myClient.connect()
+  myClient.connect();
   return myClient;
 }
 
