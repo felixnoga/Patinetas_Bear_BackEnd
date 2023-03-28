@@ -14,10 +14,9 @@ const scootersInZone = async (req, res)=>{
     else if (req.params.geometry){
         const {lng, lat}= getLoc(req.params.geometry)
         try{ 
-        const features= await model.scootersInZone(parseFloat(lng), parseFloat(lat))
-        res.status(200).json({features})}
+            const features= await model.scootersInZone(parseFloat(lng), parseFloat(lat))
+            res.status(200).json({features})}
         catch(error){
-            console.log(error)
             if (error.message === "Error: no se han encontrado scooters cerca"){
             res.status(400).json({message: error.message})}
             else

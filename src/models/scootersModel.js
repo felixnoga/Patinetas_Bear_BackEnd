@@ -16,7 +16,6 @@ class scootersManager {
             }
             return payload
         } catch (error) {
-            console.log(error)
             throw Error(error)
 
         }

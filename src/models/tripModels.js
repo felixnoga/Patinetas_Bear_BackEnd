@@ -9,12 +9,12 @@ class Payment {
     constructor(trip_id, tripTime) {
         this.trip_id = trip_id
         this.tripTime = tripTime
-        this.basePrice = 0.002
+        this.basePrice = 0.004
         this.taxes = 0.21
         this.total_price = this.PriceCalculator()
     }
     PriceCalculator = () => {
-        const result = this.tripTime * this.basePrice * this.taxes
+        const result = this.tripTime * this.basePrice * (1 + this.taxes)
         return parseFloat(result).toFixed(2)
     }
 }

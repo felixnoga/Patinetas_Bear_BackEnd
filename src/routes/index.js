@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const validateToken = require('../middlewares/validateToken')
 const app = express();
 
 
@@ -7,10 +8,10 @@ app.use("/user", require('./user'));
 // app.use("/client", require('./clients'));
 
 
-router.use("/scooters", require("./scooters"));
-router.use("/booking", require("./booking"));
-router.use("/trip", require("./trips"));
-router.post("/payment/:id", require("../controllers/paymentController"))
+router.use("/scooters",validateToken, require("./scooters"));
+router.use("/booking",validateToken, require("./booking"));
+router.use("/trip",validateToken, require("./trips"));
+router.post("/payment/:id",validateToken, require("../controllers/paymentController"))
 
 
 router.get("/", (req, res) => {
